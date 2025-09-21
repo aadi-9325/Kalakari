@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Search, ShoppingCart, User, Menu, X, Mic, Globe } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVoiceSearch, setIsVoiceSearch] = useState(false);
+  const { user, profile, signOut } = useAuth();
 
   const toggleVoiceSearch = () => {
     setIsVoiceSearch(!isVoiceSearch);
@@ -60,16 +62,33 @@ const Header: React.FC = () => {
               <button className="text-gray-700 hover:text-primary-600">
                 <Globe className="h-5 w-5" />
               </button>
-              <button className="text-gray-700 hover:text-primary-600 relative">
-                <ShoppingCart className="h-6 w-6" />
-                <span className="absolute -top-2 -right-2 bg-primary-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  3
-                </span>
-              </button>
-              <button className="btn-primary">
-                <User className="h-4 w-4 mr-2" />
-                Sign In
-              </button>
+              {user ? (
+                <>
+                  <button className="text-gray-700 hover:text-primary-600 relative">
+                    <ShoppingCart className="h-6 w-6" />
+                    <span className="absolute -top-2 -right-2 bg-primary-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      3
+                    </span>
+                  </button>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                      <User className="h-5 w-5 text-primary-600" />
+                    </div>
+                    <span className="font-medium text-gray-900">{profile?.username}</span>
+                  </div>
+                  <button
+                    onClick={signOut}
+                    className="text-gray-600 hover:text-gray-800 text-sm"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <a href="/auth" className="btn-primary">
+                  <User className="h-4 w-4 mr-2" />
+                  Sign In
+                </a>
+              )}
             </div>
           </nav>
 
@@ -104,7 +123,14 @@ const Header: React.FC = () => {
                 AI Features
               </a>
               <div className="flex items-center justify-between px-3 py-2">
-                <button className="btn-secondary text-sm">Sign In</button>
+                {user ? (
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-medium">{profile?.username}</span>
+                    <button onClick={signOut} className="btn-secondary text-sm">Sign Out</button>
+                  </div>
+                ) : (
+                  <a href="/auth" className="btn-secondary text-sm">Sign In</a>
+                )}
                 <button className="text-gray-700">
                   <ShoppingCart className="h-6 w-6" />
                 </button>
