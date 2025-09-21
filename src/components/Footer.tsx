@@ -130,7 +130,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
               <p className="text-gray-400 text-sm">
-                © 2024 Kalakriti. All rights reserved.
+                © 2025 Kalakriti. All rights reserved.
               </p>
               <div className="flex items-center space-x-1 text-red-400">
                 <span className="text-sm">Made with</span>
