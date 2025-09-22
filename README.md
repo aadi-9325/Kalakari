@@ -16,12 +16,12 @@ It is an AI-powered marketplace that connects Indian artisans with customers and
 - Next.js / React  
 - Tailwind CSS  
 - Vercel (Deployment)  
-- [Add any other tools you used]
+- Supabase (Database)
 
 ## 📦 Installation
 To run locally:
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/aadi-9325/Kalakari.git
+cd Kalakari
 npm install
 npm run dev
